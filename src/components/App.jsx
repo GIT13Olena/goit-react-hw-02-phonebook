@@ -1,19 +1,3 @@
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101'
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './ContactForm/ContactForm';
@@ -27,6 +11,17 @@ class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state;
+
+    const isContactExists = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isContactExists) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+
     const contact = {
       id: uuidv4(),
       name,
